@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>PulseX Pro | Gadget Premium de Bem-Estar Masculino</title>
+  <meta name="description" content="O mesmo gadget vendido por US$ 180 nos EUA — agora disponível no Brasil por importação direta. Frete grátis e embalagem 100% discreta." />
+  <meta name="keywords" content="pulsex pro, gadget masculino, bem-estar, automação, discrição, frete grátis" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="PulseX Pro | Gadget Premium de Bem-Estar Masculino" />
+  <meta property="og:description" content="Tecnologia automática de alta frequência. Silicone médico. Importação direta. Embalagem 100% discreta." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="assets/og-image.jpg" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ANNOUNCEMENT BAR
+═══════════════════════════════════════════════════════════════ -->
+<div class="announcement-bar" role="banner" aria-label="Informações de entrega">
+  <div class="announcement-bar__inner container">
+    <div class="announcement-bar__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Frete Grátis &amp; Rastreado para todo o Brasil
+    </div>
+    <div class="announcement-bar__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+      Embalagem 100% Discreta
+    </div>
+    <div class="announcement-bar__item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Nome na fatura: TECNOLOGIA BR
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════ -->
+<section class="hero" id="inicio" aria-labelledby="hero-headline">
+  <div class="container" style="display:contents;">
+    <!-- Content -->
+    <div class="hero__content" style="padding: 0 1.25rem;">
+      <div class="hero__eyebrow">
+        <div class="hero__eyebrow-line" aria-hidden="true"></div>
+        <span class="badge badge-neon">🔥 Promoção por Tempo Limitado</span>
+      </div>
+
+      <h1 class="hero__headline" id="hero-headline">
+        O prazer automático que<br>o mundo já descobriu. <em>Agora no Brasil.</em>
+      </h1>
+
+      <p class="hero__sub">
+        Nos EUA é vendido por <strong>US$ 180</strong>. Viemos com importação direta e estoque limitado para garantir
+        o menor preço já visto por aqui — com frete grátis e total discrição.
+      </p>
+
+      <!-- Price -->
+      <div class="price-block fade-in">
+        <div class="price-block__anchor">
+          <span class="price-block__original" id="hero-original-price">R$ 997,00</span>
+          <span class="price-block__label">▼ 70% OFF</span>
+        </div>
+        <div class="price-block__current">
+          <span class="price-block__current-prefix">R$</span>
+          <span class="price-block__current-value" id="hero-price">297</span>
+          <span style="font-size:1.3rem; font-weight:600; color:var(--gray-2)">,00</span>
+        </div>
+        <div class="price-block__installment">
+          ou <strong>12x de R$ 27,65</strong> no cartão sem juros
+        </div>
+        <div class="price-block__pix-hint">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--neon)" aria-hidden="true"><path d="M11.9 1.5 2.5 6.5v11l9.4 5 9.4-5v-11Z" opacity=".4"/><path d="M11.9 1.5v21M2.5 6.5l9.4 5 9.4-5"/></svg>
+          <span>Pague com Pix e ganhe <strong>10% extra de desconto → R$ 267,30</strong></span>
+        </div>
+      </div>
+
+      <!-- Stock Bar -->
+      <div class="stock-bar fade-in" aria-live="polite">
+        <div class="stock-bar__label">
+          <span>⚡ Estoque local disponível</span>
+          <span class="stock-bar__count" id="stock-count">Apenas 14 unidades</span>
+        </div>
+        <div class="stock-bar__track" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">
+          <div class="stock-bar__fill" id="stock-fill"></div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <a href="#checkout" class="btn-cta" id="hero-cta" aria-label="Comprar PulseX Pro com desconto">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Garantir Meu PulseX Pro Agora
+      </a>
+      <a href="#checkout" class="btn-secondary" aria-label="Pagar com Pix e economizar 10%">
+        💚 Pagar com Pix — Economize 10%
+      </a>
+
+      <!-- Trust Badges -->
+      <div class="trust-badges" role="list" aria-label="Garantias de compra">
+        <div class="trust-badge" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Compra 100% Segura
+        </div>
+        <div class="trust-badge" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="2" aria-hidden="true"><path d="M21 10C21 17 12 23 12 23s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Entrega Rastreada
+        </div>
+        <div class="trust-badge" role="listitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--neon)" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Garantia de 30 dias
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual -->
+    <div class="hero__visual" style="padding: 0 1.25rem;">
+      <div class="hero__visual-wrapper">
+        <!-- Placeholder visual — substitua pelo vídeo real -->
+        <img
+          src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&q=80"
+          alt="PulseX Pro — Gadget de bem-estar premium em embalagem tech discreta"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="hero__visual-badge">
+          <div class="hero__visual-badge-title">🏆 Mais vendido nos EUA</div>
+          <div class="hero__visual-badge-sub">4.9 ★ com +12.000 avaliações</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SOCIAL PROOF BAR
+═══════════════════════════════════════════════════════════════ -->
+<div class="proof-bar" aria-label="Indicadores de confiança">
+  <div class="proof-bar__inner container">
+    <div class="proof-item">
+      <span class="proof-item__icon" aria-hidden="true">⭐</span>
+      4.9 / 5 estrelas
+    </div>
+    <div class="proof-item">
+      <span class="proof-item__icon" aria-hidden="true">📦</span>
+      +3.200 pedidos entregues
+    </div>
+    <div class="proof-item">
+      <span class="proof-item__icon" aria-hidden="true">🇧🇷</span>
+      Estoque local no Brasil
+    </div>
+    <div class="proof-item">
+      <span class="proof-item__icon" aria-hidden="true">🔒</span>
+      Pagamento criptografado
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     INSIDE THE TECH
+═══════════════════════════════════════════════════════════════ -->
+<section class="tech-section" id="tecnologia" aria-labelledby="tech-title">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-header__eyebrow">Tecnologia Interna</div>
+      <h2 class="section-header__title" id="tech-title">Engenharia de nível internacional</h2>
+      <p class="section-header__sub">Cada componente foi escolhido para máxima performance, segurança e durabilidade.</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">⚡</div>
+        <div class="tech-card__title">Motor Linear Duplo</div>
+        <div class="tech-card__body">
+          Sistema de pistão eletromagnético com 10 modos e 3 velocidades independentes.
+          Potência silenciosa de apenas 45dB — discreta para qualquer ambiente.
+        </div>
+        <div class="tech-card__spec">Max: 230 movimentos/min</div>
+      </div>
+
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">🧬</div>
+        <div class="tech-card__title">Silicone Grau Médico</div>
+        <div class="tech-card__body">
+          Material hipoalergênico certificado ISO 10993, livre de BPA e ftalatos.
+          Ultra-macio, resistente a temperatura e de fácil higienização.
+        </div>
+        <div class="tech-card__spec">Certificado ISO 10993</div>
+      </div>
+
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">🔋</div>
+        <div class="tech-card__title">Bateria de Longa Duração</div>
+        <div class="tech-card__body">
+          Célula de lítio de 2000 mAh com carga magnética USB-C.
+          Carrega em 90 minutos e garante até 2 horas de uso contínuo.
+        </div>
+        <div class="tech-card__spec">2h de uso · Carga USB-C</div>
+      </div>
+
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">💧</div>
+        <div class="tech-card__title">À Prova d'Água IPX7</div>
+        <div class="tech-card__body">
+          Resistente à imersão em até 1 metro de profundidade. Pode ser usado
+          no chuveiro e higienizado facilmente com água e sabão neutro.
+        </div>
+        <div class="tech-card__spec">Resistência IPX7</div>
+      </div>
+
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">📱</div>
+        <div class="tech-card__title">Controle por App</div>
+        <div class="tech-card__body">
+          Conectividade Bluetooth 5.0 com app gratuito para criar rotinas
+          personalizadas e controlar intensidade remotamente com total privacidade.
+        </div>
+        <div class="tech-card__spec">Bluetooth 5.0 · iOS & Android</div>
+      </div>
+
+      <div class="tech-card fade-in" tabindex="0">
+        <div class="tech-card__icon" aria-hidden="true">🔕</div>
+        <div class="tech-card__title">Ultra-silencioso</div>
+        <div class="tech-card__body">
+          Tecnologia de absorção de vibração garante menos de 45dB em qualquer
+          modo — mais silencioso que uma conversa normal. Perfeito para privacidade total.
+        </div>
+        <div class="tech-card__spec">&lt; 45dB em todos os modos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BENEFITS / VANTAGENS
+═══════════════════════════════════════════════════════════════ -->
+<section class="benefits-section" id="vantagens" aria-labelledby="benefits-title">
+  <div class="container">
+    <div class="benefits-grid">
+      <div>
+        <div class="section-header fade-in" style="text-align:left; margin-bottom:2.5rem;">
+          <div class="section-header__eyebrow">Por que escolher</div>
+          <h2 class="section-header__title" id="benefits-title">A diferença que você vai sentir</h2>
+        </div>
+        <div class="benefits-list">
+          <div class="benefit-item fade-in">
+            <div class="benefit-item__icon" aria-hidden="true">🎯</div>
+            <div>
+              <div class="benefit-item__title">Importação Direta = Preço Real</div>
+              <div class="benefit-item__body">
+                Compramos diretamente da fábrica parceira, sem intermediários. É por isso que
+                você paga <strong style="color:var(--white)">R$ 297</strong> pelo mesmo produto que custa US$ 180 (≈ R$ 1.000) nos EUA.
+              </div>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-item__icon" aria-hidden="true">📦</div>
+            <div>
+              <div class="benefit-item__title">Discrição Absoluta da Portaria à Fatura</div>
+              <div class="benefit-item__body">
+                A caixa chega sem qualquer logotipo ou identificação de produto. O nome
+                na fatura do seu cartão ou extrato Pix aparece como <strong style="color:var(--white)">TECNOLOGIA BR</strong>.
+              </div>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-item__icon" aria-hidden="true">🛡️</div>
+            <div>
+              <div class="benefit-item__title">Garantia de 30 Dias Sem Discussão</div>
+              <div class="benefit-item__body">
+                Se você não ficar satisfeito por qualquer motivo nos primeiros 30 dias,
+                devolvemos 100% do valor. Nenhuma pergunta, nenhuma burocracia.
+              </div>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-item__icon" aria-hidden="true">🚀</div>
+            <div>
+              <div class="benefit-item__title">Despacho em até 24h Úteis</div>
+              <div class="benefit-item__body">
+                Estoque físico no Brasil. Pedidos confirmados chegam em 3 a 7 dias úteis
+                com código de rastreio enviado por email logo após a confirmação.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefits-visual fade-in" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80"
+          alt="Gadget premium PulseX Pro embalagem tech discreta"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════════════════════════ -->
+<section class="testimonials-section" id="avaliacoes" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-header__eyebrow">Avaliações Verificadas</div>
+      <h2 class="section-header__title" id="testimonials-title">O que nossos clientes dizem</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <article class="testimonial-card fade-in">
+        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="testimonial-card__text">
+          "Comprei com desconfiança, mas chegou em 4 dias numa caixinha preta sem nada escrito.
+          A qualidade é absurda, parece mesmo que vale US$180. Recomendo muito."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" aria-hidden="true">R</div>
+          <div>
+            <div class="testimonial-card__name">Ricardo M.</div>
+            <div class="testimonial-card__meta">São Paulo · Compra verificada ✓</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fade-in">
+        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="testimonial-card__text">
+          "O que me convenceu foi poder pagar com Pix e o nome discreto na fatura. Chegou certinho,
+          abri e fiquei impressionado com o acabamento. Motor muito mais potente do que imaginava."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" aria-hidden="true">F</div>
+          <div>
+            <div class="testimonial-card__name">Felipe A.</div>
+            <div class="testimonial-card__meta">Belo Horizonte · Compra verificada ✓</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card fade-in">
+        <div class="testimonial-card__stars" aria-label="5 estrelas">★★★★★</div>
+        <p class="testimonial-card__text">
+          "Já comprei um similar por R$ 600 e esse aqui é melhor em tudo. Silicone mais macio,
+          motor mais silencioso, bateria dura o dobro. Muito feliz com a compra."
+        </p>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar" aria-hidden="true">G</div>
+          <div>
+            <div class="testimonial-card__name">Gustavo L.</div>
+            <div class="testimonial-card__meta">Curitiba · Compra verificada ✓</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PRIVACY / GUARANTEE
+═══════════════════════════════════════════════════════════════ -->
+<section class="privacy-section" id="privacidade" aria-labelledby="privacy-title">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-header__eyebrow">Compromisso com Discrição</div>
+      <h2 class="section-header__title" id="privacy-title">Sua privacidade é sagrada aqui</h2>
+      <p class="section-header__sub">
+        Entendemos que discrição não é opcional. É um direito. Veja como protegemos você em cada etapa.
+      </p>
+    </div>
+
+    <div class="privacy-cards">
+      <div class="privacy-card fade-in">
+        <div class="privacy-card__icon" aria-hidden="true">📦</div>
+        <div class="privacy-card__title">Embalagem Neutra</div>
+        <div class="privacy-card__body">
+          Caixa marrom simples sem logotipos, sem descrição de produto. Parece
+          qualquer encomenda comum de e-commerce.
+        </div>
+      </div>
+      <div class="privacy-card fade-in">
+        <div class="privacy-card__icon" aria-hidden="true">🧾</div>
+        <div class="privacy-card__title">Fatura Discreta</div>
+        <div class="privacy-card__body">
+          Cartão de crédito, extrato ou comprovante Pix? O nome exibido é sempre
+          <strong style="color:var(--white)">TECNOLOGIA BR</strong>, nada mais.
+        </div>
+      </div>
+      <div class="privacy-card fade-in">
+        <div class="privacy-card__icon" aria-hidden="true">🔐</div>
+        <div class="privacy-card__title">Dados 100% Seguros</div>
+        <div class="privacy-card__body">
+          Seus dados pessoais são criptografados e nunca compartilhados.
+          Deletamos seus dados de pagamento após a aprovação.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CHECKOUT
+═══════════════════════════════════════════════════════════════ -->
+<section class="checkout-section" id="checkout" aria-labelledby="checkout-title">
+  <div class="container">
+    <div class="section-header fade-in" style="margin-bottom:3rem;">
+      <div class="section-header__eyebrow">Finalizar Pedido</div>
+      <h2 class="section-header__title" id="checkout-title">Garanta o seu agora</h2>
+      <p class="section-header__sub">Preencha os dados abaixo. Leva menos de 1 minuto.</p>
+    </div>
+
+    <div class="checkout-wrapper">
+      <!-- Order Summary -->
+      <aside class="order-summary fade-in" aria-label="Resumo do pedido">
+        <div class="order-summary__title">📋 Resumo do Pedido</div>
+
+        <div class="order-item">
+          <div class="order-item__img" aria-hidden="true">🚀</div>
+          <div>
+            <div class="order-item__name">PulseX Pro</div>
+            <div class="order-item__sub">Gadget Premium · 1 unidade</div>
+          </div>
+          <div class="order-item__price">
+            R$ 297,00
+            <s>R$ 997,00</s>
+          </div>
+        </div>
+
+        <div class="order-rows" id="order-rows">
+          <div class="order-row">
+            <span>Subtotal</span>
+            <span>R$ 297,00</span>
+          </div>
+          <div class="order-row">
+            <span>Frete</span>
+            <span style="color:var(--neon)">GRÁTIS</span>
+          </div>
+          <div class="order-row" id="pix-discount-row" style="display:none;">
+            <span>Desconto Pix (10%)</span>
+            <span class="order-row__discount">− R$ 29,70</span>
+          </div>
+          <div class="order-row order-row--total" id="order-total-row">
+            <span>Total</span>
+            <span id="order-total">R$ 297,00</span>
+          </div>
+          <div class="order-row order-row--pix-total" id="pix-total-row" style="display:none;">
+            <span>✓ Você economizou</span>
+            <span>R$ 29,70</span>
+          </div>
+        </div>
+
+        <div class="order-guarantee">
+          🛡️ <strong>Garantia de 30 dias</strong><br>
+          Se não ficar 100% satisfeito, devolvemos seu dinheiro sem questionamentos.
+        </div>
+      </aside>
+
+      <!-- Form -->
+      <div class="checkout-form fade-in" role="main" aria-label="Formulário de checkout">
+        <div class="checkout-form__title">Seus Dados</div>
+        <div class="checkout-form__sub">Preenchimento seguro · conexão criptografada SSL</div>
+
+        <!-- Steps -->
+        <div class="form-steps" aria-label="Etapas do checkout" role="list">
+          <div class="form-step active" id="step-1" role="listitem">1 · Dados</div>
+          <div class="form-step" id="step-2" role="listitem">2 · Pagamento</div>
+          <div class="form-step" id="step-3" role="listitem">3 · Confirmar</div>
+        </div>
+
+        <!-- Form proper -->
+        <form id="checkout-form" novalidate autocomplete="on">
+          <!-- Personal Info -->
+          <section id="section-personal" aria-label="Informações pessoais">
+            <div class="form-group">
+              <label for="input-name" class="form-label">Nome Completo *</label>
+              <input
+                type="text" id="input-name" name="name"
+                class="form-input" placeholder="Seu nome completo"
+                autocomplete="name" required
+              />
+              <div class="form-error" id="error-name">Por favor informe seu nome completo.</div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="input-email" class="form-label">E-mail *</label>
+                <input
+                  type="email" id="input-email" name="email"
+                  class="form-input" placeholder="seu@email.com"
+                  autocomplete="email" required
+                />
+                <div class="form-error" id="error-email">E-mail inválido.</div>
+              </div>
+              <div class="form-group">
+                <label for="input-cpf" class="form-label">CPF *</label>
+                <input
+                  type="text" id="input-cpf" name="cpf"
+                  class="form-input" placeholder="000.000.000-00"
+                  autocomplete="off" required maxlength="14"
+                />
+                <div class="form-error" id="error-cpf">CPF inválido.</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Payment Method -->
+          <section id="section-payment" aria-label="Método de pagamento">
+            <div class="form-group">
+              <div class="form-label">Forma de Pagamento *</div>
+              <div class="payment-tabs" role="tablist" aria-label="Formas de pagamento">
+                <button
+                  type="button" role="tab"
+                  class="payment-tab active" id="tab-pix"
+                  aria-selected="true" aria-controls="panel-pix"
+                  data-method="pix"
+                >
+                  <span class="tab-icon" aria-hidden="true">📱</span>
+                  <span>Pix</span>
+                  <span class="pix-badge">−10%</span>
+                </button>
+                <button
+                  type="button" role="tab"
+                  class="payment-tab" id="tab-card"
+                  aria-selected="false" aria-controls="panel-card"
+                  data-method="credit_card"
+                >
+                  <span class="tab-icon" aria-hidden="true">💳</span>
+                  <span>Cartão de Crédito</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Pix info -->
+            <div id="panel-pix" role="tabpanel" aria-labelledby="tab-pix">
+              <div class="pix-info">
+                <span class="pix-info__icon" aria-hidden="true">💚</span>
+                <div>
+                  Ao finalizar, você verá o <strong>QR Code e o código Copia &amp; Cola</strong> do Pix aqui mesmo na página.
+                  Aprovação imediata em segundos. Desconto de 10% aplicado automaticamente.
+                </div>
+              </div>
+            </div>
+
+            <!-- Card fields -->
+            <div id="panel-card" role="tabpanel" aria-labelledby="tab-card" class="card-fields" style="display:none;">
+              <div class="form-group">
+                <label for="input-card-number" class="form-label">Número do Cartão</label>
+                <input
+                  type="text" id="input-card-number" name="card_number"
+                  class="form-input" placeholder="0000 0000 0000 0000"
+                  maxlength="19" autocomplete="cc-number"
+                />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-card-expiry" class="form-label">Validade</label>
+                  <input
+                    type="text" id="input-card-expiry" name="card_expiry"
+                    class="form-input" placeholder="MM / AA"
+                    maxlength="7" autocomplete="cc-exp"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="input-card-cvv" class="form-label">CVV</label>
+                  <input
+                    type="text" id="input-card-cvv" name="card_cvv"
+                    class="form-input" placeholder="123"
+                    maxlength="4" autocomplete="cc-csc"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="input-card-holder" class="form-label">Nome no Cartão</label>
+                <input
+                  type="text" id="input-card-holder" name="card_holder"
+                  class="form-input" placeholder="Igual ao impresso no cartão"
+                  autocomplete="cc-name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="input-installments" class="form-label">Parcelamento</label>
+                <select id="input-installments" name="installments" class="form-select">
+                  <option value="1">À vista — R$ 297,00</option>
+                  <option value="2">2x de R$ 148,50 (sem juros)</option>
+                  <option value="3">3x de R$ 99,00 (sem juros)</option>
+                  <option value="6">6x de R$ 49,50 (sem juros)</option>
+                  <option value="12" selected>12x de R$ 27,65 (sem juros)</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit" id="btn-submit" aria-label="Finalizar compra">
+            <div class="btn-text" style="display:flex; align-items:center; gap:0.6rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Finalizar Pedido com Segurança
+            </div>
+            <div class="spinner" aria-label="Processando..."></div>
+          </button>
+
+          <div class="form-security" aria-label="Segurança">
+            🔒 Dados protegidos por criptografia SSL de 256 bits
+          </div>
+        </form>
+
+        <!-- Pix Result -->
+        <div class="pix-result" id="pix-result" aria-live="polite" aria-label="QR Code Pix">
+          <div class="pix-result__title">✅ Pix gerado com sucesso!</div>
+          <div class="pix-result__sub">Escaneie o QR Code ou copie o código abaixo. Expira em:</div>
+          <div class="pix-timer" id="pix-timer" aria-live="polite">30:00</div>
+          <div class="pix-result__qr" aria-label="QR Code Pix">
+            <img id="pix-qr-img" src="" alt="QR Code Pix para pagamento" />
+          </div>
+          <div class="pix-copybox">
+            <span class="pix-copybox__text" id="pix-code-text" aria-label="Código Pix copia e cola"></span>
+            <button type="button" class="pix-copy-btn" id="pix-copy-btn" aria-label="Copiar código Pix">Copiar</button>
+          </div>
+          <p style="font-size:0.82rem; color:var(--gray-2); text-align:center; line-height:1.6;">
+            Após o pagamento, você receberá a confirmação e o código de rastreio por e-mail em até <strong style="color:var(--white)">10 minutos</strong>.
+          </p>
+        </div>
+
+        <!-- Card Success -->
+        <div class="card-success" id="card-success" aria-live="polite" aria-label="Pagamento aprovado">
+          <div class="card-success__icon" aria-hidden="true">🎉</div>
+          <div class="card-success__title">Pagamento Aprovado!</div>
+          <div class="card-success__sub">
+            Seu pedido está confirmado. Em breve você receberá o código de rastreio por e-mail.
+            Entrega prevista em 3 a 7 dias úteis.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════════════════════ -->
+<section class="faq-section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-header__eyebrow">Dúvidas Frequentes</div>
+      <h2 class="section-header__title" id="faq-title">Perguntas &amp; Respostas</h2>
+    </div>
+
+    <div class="faq-list" id="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+          Alguém vai saber o que é o produto pelo nome na fatura?
+          <span class="faq-question__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="faq-answer" id="faq-answer-1" role="region">
+          <div class="faq-answer__inner">
+            Não. O nome que aparece no extrato do seu cartão, no comprovante Pix ou na fatura é
+            sempre <strong>TECNOLOGIA BR</strong>. Nenhum vizinho, familiar ou gerente de banco
+            saberá o que foi comprado.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+          A embalagem realmente não tem nenhuma identificação?
+          <span class="faq-question__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="faq-answer" id="faq-answer-2" role="region">
+          <div class="faq-answer__inner">
+            Garantimos isso. O produto chega em caixa marrom neutra, sem logotipos, sem descrição
+            de produto externo, sem qualquer texto identificador. É idêntico a qualquer encomenda
+            de e-commerce.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+          Por que ele custa R$ 297 e não os US$ 180 (≈R$ 1.000)?
+          <span class="faq-question__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="faq-answer" id="faq-answer-3" role="region">
+          <div class="faq-answer__inner">
+            Importamos em lote diretamente da fábrica parceira, sem intermediários locais.
+            Isso nos permite repassar a economia ao cliente. O estoque é limitado a cada
+            importação, por isso as unidades têm preço reduzido enquanto durarem.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+          Quanto tempo leva para chegar?
+          <span class="faq-question__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="faq-answer" id="faq-answer-4" role="region">
+          <div class="faq-answer__inner">
+            Temos estoque físico no Brasil. Pedidos com pagamento confirmado são despachados
+            em até 24 horas úteis. A entrega leva de 3 a 7 dias úteis dependendo da
+            região, com código de rastreio enviado por email.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+          E se eu não gostar? Posso devolver?
+          <span class="faq-question__arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="faq-answer" id="faq-answer-5" role="region">
+          <div class="faq-answer__inner">
+            Sim. Garantia de satisfação de 30 dias. Se por qualquer motivo você não ficar
+            satisfeito, nos contate dentro do prazo e processamos o reembolso integral.
+            Sem burocracia, sem perguntas constrangedoras.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FINAL CTA BANNER
+═══════════════════════════════════════════════════════════════ -->
+<section class="final-cta" aria-labelledby="final-cta-title">
+  <div class="container">
+    <div class="badge badge-red fade-in" style="margin: 0 auto 1.5rem; display: inline-flex;">
+      ⚡ <span id="final-stock-count">14 unidades</span> restantes neste lote
+    </div>
+    <h2 class="final-cta__title fade-in" id="final-cta-title">
+      Pronto para experimentar a<br>melhor tecnologia da categoria?
+    </h2>
+    <p class="final-cta__sub fade-in">
+      Embalagem discreta · Frete grátis · Garantia de 30 dias · Fatura no nome TECNOLOGIA BR
+    </p>
+    <a href="#checkout" class="btn-cta fade-in" aria-label="Ir para o checkout e garantir o produto">
+      🔒 Quero Garantir o Meu Agora
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <p>
+      <strong>TECNOLOGIA BR</strong> &mdash; Comércio e Importação de Gadgets Ltda.<br>
+      CNPJ: 00.000.000/0001-00 &mdash; Todos os direitos reservados &copy; <span id="footer-year">2025</span>
+    </p>
+    <p style="margin-top:0.5rem;">
+      <a href="#privacidade">Política de Privacidade</a> &nbsp;·&nbsp;
+      <a href="#faq">Trocas &amp; Devoluções</a> &nbsp;·&nbsp;
+      <a href="mailto:contato@tecnologiabr.com.br">contato@tecnologiabr.com.br</a>
+    </p>
+    <p style="margin-top:0.75rem; font-size:0.72rem; color:var(--gray-3); max-width:680px; margin-left:auto; margin-right:auto;">
+      Este produto é destinado exclusivamente a maiores de 18 anos. As imagens e vídeos são meramente ilustrativos.
+      O produto pode diferir levemente das fotos. Prazo de entrega sujeito à disponibilidade dos Correios/transportadora.
+    </p>
+  </div>
+</footer>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+</body>
+</html>
