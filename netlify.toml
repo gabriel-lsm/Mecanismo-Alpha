@@ -8,5 +8,4 @@
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
 
-[functions."payment"]
-  runtime = "python3.9"
+
