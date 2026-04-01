@@ -1,30 +1,122 @@
 """
 netlify/functions/payment.py
-Netlify Function (Python) — Integração com a API SyncPay.
-Responsável por processar pagamentos via Pix e Cartão de Crédito.
+Netlify Function (Python) — Integração com a API SyncPayments.
+Responsável por processar pagamentos via Pix (novo fluxo autenticado).
 """
 
 import json
 import os
 import re
 import requests
+import io
+import base64
 
-
-# ─── Configurações da SyncPay ─────────────────────────────────────────────────
-SYNCPAY_API_URL = "https://api.syncpay.com.br/v1/payments"
-SYNCPAY_API_KEY = os.environ.get("SYNCPAY_API", "")  # Definida no .env do Netlify
+# --- Constants e Configurações ---
+BASE_URL = "https://api.syncpayments.com.br/"
 
 # Preços em centavos (fallback se não vier do request)
 SALE_PRICE_CENTS = 29700   # R$ 297,00
 PIX_DISCOUNT_PCT = 0.10    # 10%
 
+# --- Classe Backend SyncPayments (Baseada no script validado) ---
+class SyncPayBackend:
+    def __init__(self):
+        self.base_url = BASE_URL.strip("/")
+        self.client_id = os.getenv("SYNCPAY_ID", os.environ.get("SYNCPAY_API_KEY", ""))
+        self.client_secret = os.getenv("SYNCPAY_API", os.environ.get("SYNCPAY_API_KEY", ""))
+        self.token = None
+
+    def obter_token(self):
+        """Passo 1: Autentica na API para ganhar um token temporário"""
+        url = f"{self.base_url}/api/partner/v1/auth-token"
+        payload = {
+            "client_id": self.client_id,
+            "client_secret": self.client_secret
+        }
+        headers = {'Content-Type': 'application/json'}
+
+        try:
+            response = requests.post(url, json=payload, headers=headers, timeout=10)
+            if response.status_code == 200:
+                self.token = response.json().get("access_token")
+                print("🔑 Token obtido com sucesso!")
+                return self.token
+            else:
+                print(f"❌ Erro na autenticação ({response.status_code}): {response.text}")
+                return None
+        except Exception as e:
+            print(f"💥 Falha catastrófica ao conectar no Token: {e}")
+            return None
+
+    def gerar_pix_deposito(self, valor, nome, cpf, email):
+        """Passo 2: Usa o token para gerar a cobrança PIX"""
+        if not self.token:
+            if not self.obter_token():
+                return {"error": "Falha na autenticação. Verifique suas credenciais."}
+
+        url = f"{self.base_url}/api/partner/v1/cash-in"
+        
+        payload = {
+            "amount": valor,
+            "description": f"Compra de {nome}",
+            "webhook_url": "https://seu-site.com/api/webhook",
+            "client": {
+                "name": nome,
+                "cpf": clean_cpf(cpf),
+                "email": email,
+                "phone": "11999999999"  # Fixo com 11 dígitos conforme validado
+            }
+        }
+
+        headers = {
+            'Authorization': f'Bearer {self.token}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+
+        try:
+            print(f"📡 Solicitando PIX de R$ {valor}...")
+            response = requests.post(url, json=payload, headers=headers, timeout=15)
+            
+            if response.status_code in [200, 201]:
+                print("✅ PIX GERADO!")
+                return response.json()
+            else:
+                erro_msg = f"Erro ao gerar PIX ({response.status_code}): {response.text}"
+                print(f"❌ {erro_msg}")
+                return {"error": erro_msg}
+        except Exception as e:
+            msg = f"💥 Erro na conexão do Cash-in: {e}"
+            print(msg)
+            return {"error": msg}
+
+    def gerar_qrcode_base64(self, conteudo_pix):
+        """Alternativa para gerar a imagem base64 na própria Netlify function."""
+        try:
+            import qrcode
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=10,
+                border=4,
+            )
+            qr.add_data(conteudo_pix)
+            qr.make(fit=True)
+            img = qr.make_image(fill_color="black", back_color="white")
+            
+            buffer = io.BytesIO()
+            img.save(buffer, format="PNG")
+            img_str = base64.b64encode(buffer.getvalue()).decode()
+            return f"data:image/png;base64,{img_str}"
+        except ImportError:
+            print("⚠️ Biblioteca 'qrcode' não encontrada. Retornando vazio para a imagem.")
+            return ""
 
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
 def clean_cpf(cpf: str) -> str:
     """Remove formatação do CPF."""
     return re.sub(r"\D", "", cpf)
-
 
 def validate_cpf(cpf: str) -> bool:
     """Validação básica de CPF brasileiro."""
@@ -37,7 +129,6 @@ def validate_cpf(cpf: str) -> bool:
             return False
     return True
 
-
 def cors_headers() -> dict:
     return {
         "Access-Control-Allow-Origin": "*",
@@ -49,7 +140,7 @@ def cors_headers() -> dict:
 
 # ─── Handler Principal ────────────────────────────────────────────────────────
 
-def handler(event, context):
+def process_payment(event, context):
     # Preflight CORS
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 204, "headers": cors_headers(), "body": ""}
@@ -75,11 +166,6 @@ def handler(event, context):
     email = body.get("email", "").strip().lower()
     cpf = body.get("cpf", "").strip()
     method = body.get("method", "pix").lower()
-    card_number = body.get("card_number", "")
-    card_expiry = body.get("card_expiry", "")
-    card_cvv = body.get("card_cvv", "")
-    card_holder = body.get("card_holder", "").strip()
-    installments = int(body.get("installments", 1))
 
     # ── Validações ────────────────────────────────────────────────────────────
     if not name or not email or not cpf:
@@ -96,11 +182,12 @@ def handler(event, context):
             "body": json.dumps({"error": "CPF inválido."}),
         }
 
-    if method not in ("pix", "credit_card"):
+    if method != "pix":
+        # Bloqueando CC por enquanto já que a homologação atual é PIX via SyncPayments
         return {
             "statusCode": 400,
             "headers": cors_headers(),
-            "body": json.dumps({"error": "Método de pagamento inválido."}),
+            "body": json.dumps({"error": "Método de pagamento não suportado nesta integração."}),
         }
 
     # ── Cálculo de Valor ──────────────────────────────────────────────────────
@@ -108,91 +195,51 @@ def handler(event, context):
     if method == "pix":
         amount_cents = int(amount_cents * (1 - PIX_DISCOUNT_PCT))
 
-    # ── Montagem do Payload SyncPay ───────────────────────────────────────────
-    payload = {
-        "amount": amount_cents,
-        "currency": "BRL",
-        "payment_method": method,
-        "customer": {
-            "name": name,
-            "email": email,
-            "cpf": clean_cpf(cpf),
-        },
-        "description": "PulseX Pro — TECNOLOGIA BR",
-        "statement_descriptor": "TECNOLOGIA BR",
-        "metadata": {
-            "product": "pulsex_pro",
-            "source": "landing_page",
-        },
-    }
+    # O script usa valor em float (ex: 1.50) em vez de centavos.
+    amount_float = amount_cents / 100.0
 
-    if method == "credit_card":
-        payload["card"] = {
-            "number": re.sub(r"\D", "", card_number),
-            "expiry_month": card_expiry.split("/")[0].strip() if "/" in card_expiry else "",
-            "expiry_year": card_expiry.split("/")[1].strip() if "/" in card_expiry else "",
-            "cvv": card_cvv,
-            "holder_name": card_holder,
-            "installments": installments,
-        }
+    # ── Integração SyncPayBackend ─────────────────────────────────────────────
+    syncpay = SyncPayBackend()
+    data = syncpay.gerar_pix_deposito(valor=amount_float, nome=name, cpf=cpf, email=email)
 
-    # ── Chamada à API SyncPay ─────────────────────────────────────────────────
-    try:
-        resp = requests.post(
-            SYNCPAY_API_URL,
-            json=payload,
-            headers={
-                "Authorization": f"Bearer {SYNCPAY_API_KEY}",
-                "Content-Type": "application/json",
-            },
-            timeout=15,
-        )
-        data = resp.json()
-    except requests.exceptions.Timeout:
+    if "error" in data:
         return {
-            "statusCode": 504,
+            "statusCode": 500,
             "headers": cors_headers(),
-            "body": json.dumps({"error": "Timeout ao conectar com o gateway de pagamento."}),
-        }
-    except Exception as e:
-        return {
-            "statusCode": 502,
-            "headers": cors_headers(),
-            "body": json.dumps({"error": f"Erro de comunicação: {str(e)}"}),
-        }
-
-    if resp.status_code not in (200, 201):
-        error_msg = data.get("message") or data.get("error") or "Erro no gateway de pagamento."
-        return {
-            "statusCode": resp.status_code,
-            "headers": cors_headers(),
-            "body": json.dumps({"error": error_msg}),
+            "body": json.dumps({"error": data["error"]}),
         }
 
     # ── Resposta ao Frontend ──────────────────────────────────────────────────
+    # O objeto devolvido pela API SyncPayments possivelmente contém o campo pix_code
+    pix_text = data.get("pix_code") or data.get("qrcode") or ""
+    pix_image = syncpay.gerar_qrcode_base64(pix_text) if pix_text else ""
+
     response_payload = {
         "success": True,
-        "method": method,
-        "amount_brl": amount_cents / 100,
-        "payment_id": data.get("id"),
-        "status": data.get("status"),
+        "method": "pix",
+        "amount_brl": amount_float,
+        "payment_id": data.get("id") or data.get("transaction_id"),
+        "status": "pending",
+        "pix": {
+            "qr_code_image": pix_image, 
+            "qr_code_text": pix_text,   
+            "expires_at": None,
+        }
     }
-
-    if method == "pix":
-        pix = data.get("pix", {})
-        response_payload["pix"] = {
-            "qr_code_image": pix.get("qr_code_image"),   # Base64 PNG
-            "qr_code_text": pix.get("qr_code_text"),     # Copia e Cola
-            "expires_at": pix.get("expires_at"),
-        }
-    else:
-        response_payload["card"] = {
-            "authorized": data.get("status") == "authorized",
-            "last4": data.get("card", {}).get("last4"),
-        }
 
     return {
         "statusCode": 200,
         "headers": cors_headers(),
         "body": json.dumps(response_payload),
     }
+
+def handler(event, context):
+    try:
+        return process_payment(event, context)
+    except Exception as e:
+        # Captura qualquer erro não tratado na função e retorna JSON para evitar erro de frontend
+        return {
+            "statusCode": 500,
+            "headers": cors_headers(),
+            "body": json.dumps({"error": f"Erro interno no servidor: {str(e)}"}),
+        }
