@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Seguro | Thrusting Cannon King – Leten</title>
+    <meta name="description" content="Finalize sua compra do Thrusting Cannon King com segurança. Pix com 10% de desconto ou cartão em até 12x. Embalagem 100% discreta.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --light-bg: #f9fafb;
+            --form-bg: #ffffff;
+            --brand-color: #2563eb;
+            --success-color: #16a34a;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: #1f2937;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .text-brand { color: var(--brand-color); }
+        .text-success { color: var(--success-color); }
+
+        .form-input {
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #111827;
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            outline: none;
+            transition: all 0.2s;
+            font-size: 1rem;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .form-input:focus {
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+        .form-input::placeholder { color: #9ca3af; }
+
+        /* Radio Button Customizado */
+        .payment-method-radio:checked + div {
+            border-color: var(--brand-color);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+        .payment-method-radio:checked + div .radio-icon { color: var(--brand-color); }
+        .payment-method-radio:checked + div .radio-text-active { color: var(--brand-color); }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-left-color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Pix Timer */
+        @keyframes pulse-timer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .timer-pulse { animation: pulse-timer 1s ease-in-out infinite; }
+    </style>
+</head>
+<body class="pb-20 lg:pb-12">
+
+    <!-- Topbar -->
+    <div class="bg-white border-b border-gray-200 py-3 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 flex justify-between items-center">
+            <!-- Botão Voltar -->
+            <a href="index.html" class="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors font-medium">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span class="hidden sm:inline">Voltar</span>
+            </a>
+            <div class="flex items-center gap-2 text-sm font-bold text-green-700">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+                <span>Ambiente 100% Seguro e Criptografado</span>
+            </div>
+            <div class="w-16"></div><!-- spacer -->
+        </div>
+    </div>
+
+    <!-- Container Principal -->
+    <div class="max-w-5xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+        
+        <!-- Coluna Esquerda (Formulário) -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <!-- ALERTA DE DISCRIÇÃO -->
+            <div class="bg-green-50 border border-green-200 rounded-2xl p-5 flex gap-4 items-start shadow-sm">
+                <div class="bg-green-100 p-2 rounded-full shrink-0">
+                    <i data-lucide="package-check" class="w-6 h-6 text-green-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-green-900 text-base mb-1">Entrega e Fatura 100% Discretas</h3>
+                    <p class="text-sm text-green-800 leading-relaxed">Sua privacidade é garantida. Enviamos em uma <b>caixa de papelão parda comum</b>, sem nenhuma logo, imagem ou menção ao produto. Na fatura do cartão aparecerá apenas "<b>TECNOLOGIA BR</b>".</p>
+                </div>
+            </div>
+
+            <form id="main-checkout-form" class="space-y-8" novalidate>
+                
+                <!-- Passo 1: Dados Pessoais -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5 border-b border-gray-100 pb-4">
+                        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">1</div>
+                        <h2 class="text-lg font-bold text-gray-900">Seus Dados</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nome Completo *</label>
+                            <input type="text" id="nome" required class="form-input" placeholder="Como no seu documento" autocomplete="name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">E-mail *</label>
+                            <input type="email" id="email" required class="form-input" placeholder="Para receber o rastreio" autocomplete="email">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">CPF *</label>
+                                <input type="tel" id="cpf" required class="form-input" placeholder="000.000.000-00" maxlength="14" autocomplete="off">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">WhatsApp *</label>
+                                <input type="tel" id="celular" required class="form-input" placeholder="(00) 00000-0000" maxlength="15" autocomplete="tel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passo 2: Endereço -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5 border-b border-gray-100 pb-4">
+                        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">2</div>
+                        <h2 class="text-lg font-bold text-gray-900">Onde vamos entregar?</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="relative w-full sm:w-1/2">
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">CEP *</label>
+                            <input type="tel" id="cep" required class="form-input" placeholder="00000-000" maxlength="9" autocomplete="postal-code">
+                            <div id="cep-loader" class="absolute right-3 top-9 hidden">
+                                <i data-lucide="loader-2" class="w-5 h-5 text-blue-600 animate-spin"></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Rua / Avenida *</label>
+                            <input type="text" id="endereco" required class="form-input" placeholder="Ex: Avenida Brasil" autocomplete="street-address">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            <div class="col-span-1">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Número *</label>
+                                <input type="tel" id="numero" required class="form-input" placeholder="123">
+                            </div>
+                            <div class="col-span-1 sm:col-span-2">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Complemento <span class="text-gray-400 font-normal">(Opcional)</span></label>
+                                <input type="text" id="complemento" class="form-input" placeholder="Apto, Bloco, Casa" autocomplete="address-line2">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Bairro *</label>
+                                <input type="text" id="bairro" required class="form-input" placeholder="Seu bairro">
+                            </div>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1.5">Cidade *</label>
+                                    <input type="text" id="cidade" required class="form-input" placeholder="Sua cidade" autocomplete="address-level2">
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1.5">UF *</label>
+                                    <select id="estado" required class="form-input appearance-none bg-white px-2 text-center" autocomplete="address-level1">
+                                        <option value="">--</option>
+                                        <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tabela de Frete Fixa -->
+                        <div class="mt-6 pt-6 border-t border-gray-100">
+                            <label class="block text-sm font-bold text-gray-900 mb-3 uppercase tracking-wider">Forma de Envio</label>
+                            <div class="w-full overflow-hidden rounded-xl border border-gray-200 bg-white">
+                                <div class="overflow-x-auto no-scrollbar">
+                                    <table class="w-full text-left text-sm text-gray-700 min-w-[300px]">
+                                        <thead class="bg-gray-50 text-xs uppercase text-gray-500 border-b border-gray-200">
+                                            <tr>
+                                                <th scope="col" class="px-4 py-3 text-center w-12">-</th>
+                                                <th scope="col" class="px-4 py-3">Tipo</th>
+                                                <th scope="col" class="px-4 py-3">Valor</th>
+                                                <th scope="col" class="px-4 py-3">Prazo de entrega</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-green-50">
+                                                <td class="px-4 py-4 text-center">
+                                                    <input type="radio" checked onclick="return false;" class="w-4 h-4 accent-[#16a34a] cursor-default">
+                                                </td>
+                                                <td class="px-4 py-4 font-bold text-green-700">PAC</td>
+                                                <td class="px-4 py-4 font-bold text-green-700">Frete Grátis!</td>
+                                                <td class="px-4 py-4 font-bold text-green-700 whitespace-nowrap">até 8 dias</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Passo 3: Pagamento -->
+                <div class="bg-white border border-gray-200 rounded-2xl p-5 sm:p-7 shadow-sm">
+                    <div class="flex items-center gap-3 mb-5 border-b border-gray-100 pb-4">
+                        <div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">3</div>
+                        <h2 class="text-lg font-bold text-gray-900">Pagamento Seguro</h2>
+                    </div>
+
+                    <!-- Abas de Pagamento -->
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <!-- PIX -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="payment_method" value="pix" id="radio-pix" class="peer sr-only payment-method-radio" checked onchange="togglePaymentView()">
+                            <div class="border border-gray-200 bg-gray-50 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:border-gray-300 transition h-full text-center">
+                                <i data-lucide="zap" class="w-7 h-7 text-gray-400 radio-icon"></i>
+                                <div>
+                                    <span class="block font-bold text-gray-900 radio-text-active">Pix</span>
+                                    <span class="block text-xs text-green-600 mt-0.5 font-bold">10% de Desconto</span>
+                                </div>
+                            </div>
+                        </label>
+                        
+                        <!-- Cartão -->
+                        <label class="cursor-pointer relative">
+                            <input type="radio" name="payment_method" value="credit_card" id="radio-card" class="peer sr-only payment-method-radio" onchange="togglePaymentView()">
+                            <div class="border border-gray-200 bg-gray-50 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:border-gray-300 transition h-full text-center">
+                                <i data-lucide="credit-card" class="w-7 h-7 text-gray-400 radio-icon"></i>
+                                <div>
+                                    <span class="block font-bold text-gray-900 radio-text-active">Cartão</span>
+                                    <span class="block text-xs text-gray-500 mt-0.5 font-medium">Até 12x</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- View: PIX -->
+                    <div id="view-pix" class="bg-blue-50 border border-blue-100 rounded-xl p-5 text-center">
+                        <p class="text-sm text-blue-900 mb-3 font-medium">O pagamento via Pix é aprovado na hora e seu pedido é enviado mais rápido.</p>
+                        <div class="inline-flex items-center justify-center gap-2 bg-white text-green-600 px-4 py-2 rounded-lg border border-green-200 font-bold mb-2 shadow-sm">
+                            <i data-lucide="check-circle" class="w-5 h-5"></i> Desconto de R$ 13,00 Aplicado!
+                        </div>
+                    </div>
+
+                    <!-- View: Cartão de Crédito -->
+                    <div id="view-card" class="hidden bg-gray-50 border border-gray-200 rounded-xl p-5 space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Número do Cartão *</label>
+                            <div class="relative">
+                                <input type="tel" id="cc-number" class="form-input pl-12 font-mono text-lg tracking-wider" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="cc-number">
+                                <i data-lucide="credit-card" class="w-6 h-6 absolute left-3.5 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nome do Titular *</label>
+                            <input type="text" id="cc-name" class="form-input" placeholder="Nome impresso no cartão" autocomplete="cc-name">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Validade *</label>
+                                <input type="tel" id="cc-exp" class="form-input text-center font-mono" placeholder="MM/AA" maxlength="5" autocomplete="cc-exp">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1.5">Código (CVV) *</label>
+                                <input type="tel" id="cc-cvv" class="form-input text-center font-mono" placeholder="123" maxlength="4" autocomplete="cc-csc">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Parcelamento</label>
+                            <div class="relative">
+                                <select id="cc-installments" class="form-input appearance-none bg-white font-medium" autocomplete="off">
+                                    <!-- Opções geradas via JS -->
+                                </select>
+                                <i data-lucide="chevron-down" class="w-5 h-5 absolute right-4 top-3.5 text-gray-500 pointer-events-none"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Mensagem de Erro Global -->
+                <div id="global-error" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-red-600 shrink-0 mt-0.5"></i>
+                    <p id="global-error-text" class="text-sm text-red-800 font-medium"></p>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Coluna Direita (Resumo e Botão) -->
+        <div class="lg:col-span-5 relative">
+            <div class="lg:sticky lg:top-8 bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg">
+                
+                <!-- Produto Miniatura -->
+                <div class="p-5 border-b border-gray-100 flex items-center gap-4 bg-gray-50">
+                    <div class="w-16 h-16 bg-white rounded-xl border border-gray-200 flex items-center justify-center shrink-0 shadow-sm overflow-hidden">
+                        <img src="imgs/img (1).jpg" onerror="this.src='https://placehold.co/80/e2e8f0/c59b27?text=CK'" alt="Cannon King" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900">Thrusting Cannon King</h3>
+                        <p class="text-xs text-gray-500 mt-1 font-medium">Leten • Sigilo Total</p>
+                    </div>
+                </div>
+
+                <!-- Detalhamento -->
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between text-gray-600 text-sm font-medium">
+                        <span>Produto</span>
+                        <span>R$ 129,90</span>
+                    </div>
+                    <div class="flex justify-between text-gray-600 text-sm font-medium">
+                        <span>Frete Expresso</span>
+                        <span class="text-green-600 font-bold">GRÁTIS</span>
+                    </div>
+                    <div id="summary-discount" class="flex justify-between text-green-600 text-sm font-bold">
+                        <span>Desconto Pix (10%)</span>
+                        <span>- R$ 13,00</span>
+                    </div>
+                    
+                    <div class="border-t border-gray-100 pt-4 mt-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900 text-lg">Total:</span>
+                            <div class="text-right">
+                                <span id="summary-total" class="font-black text-3xl text-gray-900">R$ 116,91</span>
+                                <div id="summary-installments" class="text-xs text-gray-500 font-semibold mt-1">Pagamento à vista</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão CTA Gigante -->
+                <div class="p-5 pt-0">
+                    <button type="button" id="btn-submit" onclick="submitCheckout()" class="w-full bg-green-500 hover:bg-green-600 text-white font-extrabold uppercase tracking-wide py-4 sm:py-5 rounded-xl transition-all flex items-center justify-center gap-2 text-lg shadow-[0_4px_14px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_20px_rgba(34,197,94,0.4)]">
+                        <i data-lucide="lock" class="w-5 h-5"></i>
+                        <span id="btn-submit-text">Finalizar Compra</span>
+                    </button>
+                    
+                    <!-- Selos Abaixo do Botão -->
+                    <div class="mt-5 flex flex-col items-center gap-3">
+                        <div class="flex items-center gap-2 text-xs text-gray-500 font-bold uppercase tracking-wider">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-green-600"></i> Pagamento 100% Seguro
+                        </div>
+                        <div class="flex items-center justify-center gap-4 opacity-60 mt-1">
+                            <img src="https://media.braip.com/public/card-flag/visa.png" alt="Visa" class="h-6 filter grayscale">
+                            <img src="https://media.braip.com/public/card-flag/master-card.png" alt="Mastercard" class="h-6 filter grayscale">
+                            <img src="https://media.braip.com/public/card-flag/elo.png" alt="Elo" class="h-6 filter grayscale">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =============================================
+         Modal do PIX — Exibido após geração do QR Code
+    ============================================= -->
+    <div id="pix-modal" class="fixed inset-0 bg-gray-900/70 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative shadow-2xl my-auto">
+            <i data-lucide="check-circle-2" class="w-16 h-16 text-green-500 mx-auto mb-4"></i>
+            <h2 class="text-2xl font-black mb-2 text-gray-900">Pedido Reservado!</h2>
+            <p class="text-gray-600 text-sm mb-6 leading-relaxed">Escaneie o QR Code abaixo com o app do seu banco. <br><b class="text-gray-900">O estoque está reservado por:</b></p>
+            
+            <!-- Timer do Pix -->
+            <div id="pix-timer" class="text-3xl font-black text-red-600 mb-4 timer-pulse">15:00</div>
+            
+            <!-- QR Code -->
+            <div class="bg-white p-3 rounded-2xl inline-block mb-5 border border-gray-200 shadow-sm" id="pix-qr-container">
+                <img id="pix-qr-img" src="" alt="QR Code PIX" class="w-48 h-48 mx-auto">
+                <!-- Fallback se a imagem não carregar -->
+                <div id="pix-qr-fallback" class="hidden w-48 h-48 mx-auto bg-gray-100 rounded-xl flex items-center justify-center">
+                    <p class="text-xs text-gray-500 px-4">Use o código abaixo para pagar</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-500 mb-2 font-bold uppercase tracking-wider">Ou use o código Pix Copia e Cola:</p>
+            <div class="flex bg-gray-50 border border-gray-200 rounded-xl overflow-hidden p-1 mb-3">
+                <input type="text" id="pix-code" readonly class="w-full bg-transparent text-gray-800 text-xs px-3 outline-none font-mono truncate">
+                <button onclick="copyPix()" id="copy-btn" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 transition flex items-center justify-center gap-1.5 text-sm font-bold shadow-sm whitespace-nowrap">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar
+                </button>
+            </div>
+            <p id="copy-msg" class="text-green-600 text-xs font-bold opacity-0 transition-opacity mb-4">✓ Código copiado com sucesso!</p>
+
+            <p class="text-xs text-gray-500 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
+                Após o pagamento, você receberá a confirmação e o código de rastreio por e-mail em até <strong class="text-gray-800">10 minutos</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal de Sucesso Cartão -->
+    <div id="card-success-modal" class="fixed inset-0 bg-gray-900/70 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4">
+        <div class="bg-white border border-gray-200 rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-2xl font-black mb-3 text-gray-900">Pagamento Aprovado!</h2>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">Sua compra foi processada com segurança e total discrição. Verifique seu e-mail para acompanhar o rastreio. Entrega em até 8 dias úteis.</p>
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4 text-sm text-green-800 font-medium">
+                <i data-lucide="package" class="w-4 h-4 inline mr-1"></i> Embalagem 100% discreta — nome na fatura: <strong>TECNOLOGIA BR</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================
+        // INICIALIZAÇÃO
+        // ========================
+        lucide.createIcons();
+
+        const BASE_PRICE = 129.90;
+        const PIX_DISCOUNT = 0.10;
+        const INTEREST_RATE = 0.0299;
+        const API_URL = '/.netlify/functions/payment';
+
+        let pixTimerInterval = null;
+
+        // ========================
+        // 1. MÁSCARAS DE INPUT
+        // ========================
+        const masks = {
+            cpf: (v) => v.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').replace(/(-\d{2})\d+?$/, '$1'),
+            celular: (v) => v.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{4})\d+?$/, '$1'),
+            cep: (v) => v.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2').replace(/(-\d{3})\d+?$/, '$1'),
+            cartao: (v) => v.replace(/\D/g, '').replace(/(\d{4})(\d)/, '$1 $2').replace(/(\d{4})(\d)/, '$1 $2').replace(/(\d{4})(\d)/, '$1 $2').replace(/( \d{4})\d+?$/, '$1'),
+            expiracao: (v) => v.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').replace(/(\/\d{2})\d+?$/, '$1')
+        };
+
+        document.getElementById('cpf').addEventListener('input', (e) => e.target.value = masks.cpf(e.target.value));
+        document.getElementById('celular').addEventListener('input', (e) => e.target.value = masks.celular(e.target.value));
+        document.getElementById('cep').addEventListener('input', (e) => e.target.value = masks.cep(e.target.value));
+        document.getElementById('cc-number').addEventListener('input', (e) => e.target.value = masks.cartao(e.target.value));
+        document.getElementById('cc-exp').addEventListener('input', (e) => e.target.value = masks.expiracao(e.target.value));
+
+        // ========================
+        // 2. BUSCA DE CEP AUTOMÁTICA
+        // ========================
+        document.getElementById('cep').addEventListener('blur', async (e) => {
+            const cep = e.target.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                const loader = document.getElementById('cep-loader');
+                loader.classList.remove('hidden');
+                try {
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                    const data = await response.json();
+                    if (!data.erro) {
+                        document.getElementById('endereco').value = data.logradouro || '';
+                        document.getElementById('bairro').value = data.bairro || '';
+                        document.getElementById('cidade').value = data.localidade || '';
+                        document.getElementById('estado').value = data.uf || '';
+                        document.getElementById('numero').focus();
+                    }
+                } catch (error) {
+                    console.error("Erro ao buscar CEP:", error);
+                } finally {
+                    loader.classList.add('hidden');
+                    lucide.createIcons();
+                }
+            }
+        });
+
+        // ========================
+        // 3. PARCELAMENTO
+        // ========================
+        const formatMoney = (val) => val.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        function generateInstallments() {
+            const select = document.getElementById('cc-installments');
+            select.innerHTML = `<option value="1">1x de R$ ${formatMoney(BASE_PRICE)} (Sem Juros)</option>`;
+            for (let i = 2; i <= 12; i++) {
+                const amountWithInterest = BASE_PRICE * Math.pow(1 + INTEREST_RATE, i);
+                const installmentValue = amountWithInterest / i;
+                select.innerHTML += `<option value="${i}">${i}x de R$ ${formatMoney(installmentValue)}</option>`;
+            }
+        }
+        generateInstallments();
+
+        // ========================
+        // 4. TROCA PAGAMENTO
+        // ========================
+        function togglePaymentView() {
+            const method = document.querySelector('input[name="payment_method"]:checked').value;
+            
+            document.getElementById('view-pix').classList.add('hidden');
+            document.getElementById('view-card').classList.add('hidden');
+            
+            const summaryDiscount = document.getElementById('summary-discount');
+            const summaryTotal = document.getElementById('summary-total');
+            const summaryInst = document.getElementById('summary-installments');
+
+            if (method === 'pix') {
+                document.getElementById('view-pix').classList.remove('hidden');
+                summaryDiscount.classList.remove('hidden');
+                const pixPrice = BASE_PRICE * (1 - PIX_DISCOUNT);
+                summaryTotal.innerText = `R$ ${formatMoney(pixPrice)}`;
+                summaryInst.innerText = 'Pagamento à vista';
+            } else {
+                document.getElementById('view-card').classList.remove('hidden');
+                summaryDiscount.classList.add('hidden');
+                summaryTotal.innerText = `R$ ${formatMoney(BASE_PRICE)}`;
+                summaryInst.innerText = 'Em até 12x no cartão';
+            }
+        }
+
+        // ========================
+        // 5. TIMER DO PIX
+        // ========================
+        function startPixTimer(seconds = 900) {
+            const timerEl = document.getElementById('pix-timer');
+            let remaining = seconds;
+            clearInterval(pixTimerInterval);
+            pixTimerInterval = setInterval(() => {
+                remaining--;
+                const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+                const s = String(remaining % 60).padStart(2, '0');
+                if (timerEl) timerEl.textContent = `${m}:${s}`;
+                if (remaining <= 0) {
+                    clearInterval(pixTimerInterval);
+                    if (timerEl) {
+                        timerEl.textContent = 'EXPIRADO';
+                        timerEl.classList.remove('timer-pulse');
+                        timerEl.classList.add('text-gray-400');
+                    }
+                }
+            }, 1000);
+        }
+
+        // ========================
+        // 6. EXIBIR ERRO GLOBAL
+        // ========================
+        function showError(message) {
+            const errorDiv = document.getElementById('global-error');
+            const errorText = document.getElementById('global-error-text');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            lucide.createIcons();
+        }
+
+        function hideError() {
+            document.getElementById('global-error').classList.add('hidden');
+        }
+
+        // ========================
+        // 7. FINALIZAR COMPRA — integração real com Netlify Function
+        // ========================
+        async function submitCheckout() {
+            hideError();
+            
+            const form = document.getElementById('main-checkout-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const method = document.querySelector('input[name="payment_method"]:checked').value;
+            const btn = document.getElementById('btn-submit');
+            const btnText = document.getElementById('btn-submit-text');
+
+            // Estado de carregamento
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loader"></span><span>Processando...</span>';
+
+            // Montar payload
+            const celularRaw = document.getElementById('celular').value.replace(/\D/g, '');
+            const payload = {
+                name:   document.getElementById('nome').value.trim(),
+                email:  document.getElementById('email').value.trim().toLowerCase(),
+                cpf:    document.getElementById('cpf').value.trim(),
+                phone:  celularRaw || '11999999999',
+                method: method,
+                address: {
+                    cep:         document.getElementById('cep').value.trim(),
+                    endereco:    document.getElementById('endereco').value.trim(),
+                    numero:      document.getElementById('numero').value.trim(),
+                    complemento: document.getElementById('complemento').value.trim(),
+                    bairro:      document.getElementById('bairro').value.trim(),
+                    cidade:      document.getElementById('cidade').value.trim(),
+                    estado:      document.getElementById('estado').value.trim(),
+                }
+            };
+
+            if (method === 'credit_card') {
+                payload.card_number   = document.getElementById('cc-number').value;
+                payload.card_holder   = document.getElementById('cc-name').value;
+                payload.card_expiry   = document.getElementById('cc-exp').value;
+                payload.card_cvv      = document.getElementById('cc-cvv').value;
+                payload.installments  = parseInt(document.getElementById('cc-installments').value || '1');
+            }
+
+            try {
+                const resp = await fetch(API_URL, {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify(payload),
+                });
+
+                let data;
+                const contentType = resp.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    data = await resp.json();
+                } else {
+                    const text = await resp.text();
+                    throw new Error(`Resposta inesperada do servidor: ${text.slice(0, 120)}`);
+                }
+
+                if (!resp.ok || !data.success) {
+                    throw new Error(data.error || 'Erro ao processar pagamento. Tente novamente.');
+                }
+
+                if (method === 'pix') {
+                    // Exibir QR Code real
+                    const qrImg = document.getElementById('pix-qr-img');
+                    const pixCodeInput = document.getElementById('pix-code');
+                    const qrFallback = document.getElementById('pix-qr-fallback');
+
+                    const pixText = data.pix?.qr_code_text || '';
+                    const pixImage = data.pix?.qr_code_image || '';
+
+                    if (pixImage) {
+                        const src = pixImage.startsWith('data:') ? pixImage : `data:image/png;base64,${pixImage}`;
+                        qrImg.src = src;
+                        qrImg.onload = () => qrImg.classList.remove('hidden');
+                        qrImg.onerror = () => {
+                            qrImg.classList.add('hidden');
+                            qrFallback.classList.remove('hidden');
+                        };
+                    } else {
+                        qrImg.classList.add('hidden');
+                        qrFallback.classList.remove('hidden');
+                    }
+
+                    // Se não temos imagem mas temos texto, gerar QR via API externa
+                    if (!pixImage && pixText) {
+                        const encoded = encodeURIComponent(pixText);
+                        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encoded}`;
+                        qrImg.classList.remove('hidden');
+                        qrFallback.classList.add('hidden');
+                    }
+
+                    pixCodeInput.value = pixText;
+                    
+                    // Mostrar modal do Pix
+                    const modal = document.getElementById('pix-modal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    lucide.createIcons();
+                    startPixTimer();
+
+                } else {
+                    // Cartão aprovado
+                    const modal = document.getElementById('card-success-modal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    lucide.createIcons();
+                }
+
+            } catch (err) {
+                console.error('Erro no checkout:', err);
+                showError(err.message || 'Erro de conexão. Verifique sua internet e tente novamente.');
+            } finally {
+                // Restaurar botão
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="lock" class="w-5 h-5"></i><span id="btn-submit-text">Finalizar Compra</span>';
+                lucide.createIcons();
+            }
+        }
+
+        // ========================
+        // 8. COPIAR PIX
+        // ========================
+        async function copyPix() {
+            const input = document.getElementById('pix-code');
+            const msg = document.getElementById('copy-msg');
+            try {
+                await navigator.clipboard.writeText(input.value);
+            } catch {
+                input.select();
+                document.execCommand('copy');
+            }
+            msg.classList.remove('opacity-0');
+            setTimeout(() => msg.classList.add('opacity-0'), 2500);
+        }
+    </script>
+</body>
+</html>

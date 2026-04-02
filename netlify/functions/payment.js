@@ -1,8 +1,8 @@
 const QRCode = require('qrcode');
 
 const BASE_URL = "https://api.syncpayments.com.br";
-// Preços (fallback caso queira centralizar aqui)
-const SALE_PRICE_CENTS = 29700;
+// Preços do produto (Thrusting Cannon King - Leten)
+const SALE_PRICE_CENTS = 12990; // R$ 129,90
 const PIX_DISCOUNT_PCT = 0.10;
 
 exports.handler = async (event, context) => {
@@ -29,7 +29,7 @@ exports.handler = async (event, context) => {
 
   try {
     const body = JSON.parse(event.body || "{}");
-    const { name, email, cpf, method = "pix" } = body;
+    const { name, email, cpf, phone, method = "pix" } = body;
 
     // Validação Básica
     if (!name || !email || !cpf) {
@@ -101,7 +101,7 @@ exports.handler = async (event, context) => {
           name: name,
           cpf: cleanCpf,
           email: email,
-          phone: "11999999999" // fixo validado do teste anterior
+          phone: (phone || "11999999999").replace(/\D/g, "") || "11999999999"
         }
       })
     });
